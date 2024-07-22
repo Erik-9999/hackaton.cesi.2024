@@ -59,4 +59,12 @@ class UserController extends Controller
             return response()->json(['token' => $token, 'user' => $user], 200);
         }
     }
+
+    public function logout()
+    {
+        if (Auth::user()->token()->revoke()) {
+            return response()->json(['succes' => 'You have been succesfully logout'], 200);
+        }
+        return response()->json(['error' => 'Internal serveur error'], 500);
+    }
 }
